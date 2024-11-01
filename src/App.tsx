@@ -3,7 +3,7 @@ import { AppRouter } from "./presentacion/router/AppRouter";
 
 export const App = () => {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/pokeApi">
       <AppRouter />
     </BrowserRouter>
   );
