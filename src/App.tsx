@@ -1,10 +1,10 @@
-import { BrowserRouter } from "react-router-dom";
+import { HashRouter } from "react-router-dom";
 import { AppRouter } from "./presentacion/router/AppRouter";
 
 export const App = () => {
   return (
-    <BrowserRouter basename="/pokeApi">
+    <HashRouter>
       <AppRouter />
-    </BrowserRouter>
+    </HashRouter>
   );
 };
