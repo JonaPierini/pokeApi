@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 interface PokemonCardProps {
   name: string | undefined;
-  img: string | undefined;
+  img?: string | undefined;
 }
 
 export const PokemonCard = ({ name, img }: PokemonCardProps) => {

@@ -1,7 +1,7 @@
 import {
   PokeApi,
   PokeAPIResult,
-} from "../../presentacion/infrastructure/pokeApi.interface";
+} from "../../presentation/infrastructure/pokeApi.interface";
 
 export const getPokemon = async (limit: number, offset: number) => {
   const baseUrl = "https://pokeapi.co/api/v2/pokemon";
