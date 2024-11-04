@@ -36,6 +36,7 @@ export const PokemonPage = () => {
   };
 
   const getPokemonInput = async (name: string) => {
+    if (name === "") return;
     try {
       const baseUrl = "https://pokeapi.co/api/v2/pokemon";
       const response = await fetch(`${baseUrl}/${name}`);
@@ -45,7 +46,7 @@ export const PokemonPage = () => {
     } catch (error) {
       Swal.fire({
         icon: "error",
-        title: "Oops...",
+        title: "Oops... ",
         text: "Something went wrong!",
       });
       setName("");
