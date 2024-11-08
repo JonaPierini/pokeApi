@@ -3,12 +3,12 @@ import { Button } from "../../components/ui/Button/Button";
 import { useAuthStore } from "../../store/useAuthStore";
 
 export const LoginPage = () => {
-  const { login } = useAuthStore();
+  const status = useAuthStore();
 
   return (
     <StyledContainer>
       <h1>Poke-Api</h1>
-      <Button onClick={login} title={"Ingresar"} />
+      <Button onClick={status.login} title={"Ingresar"} />
     </StyledContainer>
   );
 };

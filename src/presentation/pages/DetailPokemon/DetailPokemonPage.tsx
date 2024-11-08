@@ -4,34 +4,20 @@ import { PokeApi } from "../../infrastructure/pokeApi.interface";
 import { PokemonCard } from "../../components/ui/PokemonCard/PokemonCard";
 import styled from "styled-components";
 import { Button } from "../../components/ui/Button/Button";
+import { getPokemonDetail } from "../../../config/action/getPokemonDetail";
 
 export const DetailPokemonPage = () => {
   const [pokemonDetail, setPokemonDetail] = useState<PokeApi>();
   const { name } = useParams();
   const navigation = useNavigate();
 
-  const getData = async () => {
-    try {
-      if (name !== "") {
-        const response = await fetch(
-          `https://pokeapi.co/api/v2/pokemon/${name}`
-        );
-        const data = await response.json();
-        setPokemonDetail(data);
-      }
-    } catch (error) {
-      navigation("/");
-      throw new Error(error as never);
-    }
-  };
-
   useEffect(() => {
-    getData();
+    getPokemonDetail(name!).then((elem) => setPokemonDetail(elem));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
-    <Box>
+    <Box itemID="Box-Detail">
       <Button title="<" onClick={() => navigation("/")} />
       <PokemonCard
         name={pokemonDetail?.name}

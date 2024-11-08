@@ -6,6 +6,7 @@ import { getPokemon } from "../../../config/action/getPokemon";
 import { PokemonCard } from "../../components/ui/PokemonCard/PokemonCard";
 import { Button } from "../../components/ui/Button/Button";
 import Swal from "sweetalert2";
+import { getPokemonInput } from "../../../config/action/getPokemonInput";
 
 export const PokemonPage = () => {
   const [pokemons, setPokemons] = useState<PokeApi[]>([]);
@@ -35,22 +36,19 @@ export const PokemonPage = () => {
     });
   };
 
-  const getPokemonInput = async (name: string) => {
+  const handleSearch = () => {
     if (name === "") return;
-    try {
-      const baseUrl = "https://pokeapi.co/api/v2/pokemon";
-      const response = await fetch(`${baseUrl}/${name}`);
-      const data = await response.json();
-      setPokemons([data]);
-      setName("");
-    } catch (error) {
-      Swal.fire({
-        icon: "error",
-        title: "Oops... ",
-        text: "Something went wrong!",
-      });
-      setName("");
-    }
+    getPokemonInput(name.toLowerCase())
+      .then((elem) => setPokemons([elem]))
+      .catch((error) => {
+        console.log(error);
+        Swal.fire({
+          icon: "error",
+          title: "Oops... ",
+          text: "Something went wrong!",
+        });
+      })
+      .finally(() => setName(""));
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -61,7 +59,7 @@ export const PokemonPage = () => {
     <>
       <Box style={{ marginBottom: 10, marginTop: 10 }}>
         <input value={name} onChange={handleInputChange}></input>
-        <button onClick={() => getPokemonInput(name)}>Buscar</button>
+        <button onClick={() => handleSearch()}>Buscar</button>
       </Box>
       <Box>
         <Button
